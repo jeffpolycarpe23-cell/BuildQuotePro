@@ -1,6 +1,5 @@
-
+cd /mnt/user-data/outputs && cat > index.html << 'EOF'
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,701 +14,562 @@
             box-sizing: border-box;
         }
 
-```
-    :root {
-        --primary: #0066cc;
-        --primary-dark: #0052a3;
-        --primary-light: #3399ff;
-        --accent: #ff6b35;
-        --accent-light: #ff8c5a;
-        --success: #00cc66;
-        --success-light: #33dd88;
-        --danger: #ff3333;
-        --bg-gradient-1: #0a1929;
-        --bg-gradient-2: #132f4c;
-        --bg-light: #f0f4f8;
-        --border: #d0d9e8;
-        --text-dark: #0f1729;
-        --text-light: #525d7a;
-        --card-bg: #ffffff;
-        --shadow: 0 8px 24px rgba(10, 25, 41, 0.15);
-        --shadow-sm: 0 2px 8px rgba(10, 25, 41, 0.08);
-    }
-
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto Oxygen', 'Helvetica Neue', sans-serif;
-        background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
-        color: var(--text-dark);
-        min-height: 100vh;
-        position: relative;
-        overflow-x: hidden;
-    }
-
-    body::before {
-        content: '';
-        position: fixed;
-        top: -50%;
-        right: -10%;
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(3, 102, 204, 0.15) 0%, transparent 70%);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    body::after {
-        content: '';
-        position: fixed;
-        bottom: -20%;
-        left: -5%;
-        width: 500px;
-        height: 500px;
-        background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    .container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 20px;
-        position: relative;
-        z-index: 1;
-    }
-
-    /* Header */
-    .header {
-        background: var(--card-bg);
-        padding: 30px;
-        border-radius: 16px;
-        box-shadow: var(--shadow);
-        margin-bottom: 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 20px;
-        border: 1px solid rgba(0, 102, 204, 0.1);
-        animation: slideDown 0.5s ease-out;
-    }
-
-    @keyframes slideDown {
-        from {
-            transform: translateY(-20px);
-            opacity: 0;
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #0052a3;
+            --primary-light: #3399ff;
+            --accent: #ff6b35;
+            --accent-light: #ff8c5a;
+            --success: #00cc66;
+            --success-light: #33dd88;
+            --danger: #ff3333;
+            --bg-gradient-1: #0a1929;
+            --bg-gradient-2: #132f4c;
+            --bg-light: #f0f4f8;
+            --border: #d0d9e8;
+            --text-dark: #0f1729;
+            --text-light: #525d7a;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 24px rgba(10, 25, 41, 0.15);
+            --shadow-sm: 0 2px 8px rgba(10, 25, 41, 0.08);
         }
-        to {
-            transform: translateY(0);
-            opacity: 1;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto Oxygen', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
-    }
 
-    .header h1 {
-        font-size: 32px;
-        font-weight: 800;
-        letter-spacing: -1px;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .header-controls {
-        display: flex;
-        gap: 15px;
-        align-items: center;
-    }
-
-    .lang-toggle {
-        display: flex;
-        gap: 4px;
-        background: var(--bg-light);
-        padding: 4px;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-    }
-
-    .lang-toggle button {
-        padding: 10px 18px;
-        border: none;
-        background: transparent;
-        cursor: pointer;
-        border-radius: 8px;
-        font-weight: 700;
-        color: var(--text-light);
-        transition: all 0.3s ease;
-        font-size: 14px;
-    }
-
-    .lang-toggle button:hover {
-        color: var(--primary);
-    }
-
-    .lang-toggle button.active {
-        background: white;
-        color: var(--primary);
-        box-shadow: 0 2px 12px rgba(0, 102, 204, 0.2);
-    }
-
-    /* Buttons */
-    button {
-        padding: 12px 24px;
-        border: none;
-        border-radius: 10px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 14px;
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-        color: white;
-        box-shadow: 0 4px 16px rgba(0, 102, 204, 0.3);
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
-    }
-
-    .btn-secondary {
-        background: var(--bg-light);
-        color: var(--primary);
-        border: 2px solid var(--primary);
-    }
-
-    .btn-secondary:hover {
-        background: var(--primary);
-        color: white;
-        transform: translateY(-2px);
-    }
-
-    .btn-success {
-        background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
-        color: white;
-        box-shadow: 0 4px 16px rgba(0, 204, 102, 0.3);
-    }
-
-    .btn-success:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 204, 102, 0.4);
-    }
-
-    .btn-danger {
-        background: var(--danger);
-        color: white;
-    }
-
-    .btn-danger:hover {
-        background: #cc0000;
-    }
-
-    .btn-export {
-        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-        color: white;
-        box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
-    }
-
-    .btn-export:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-    }
-
-    .btn-small {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
-
-    /* Layout */
-    .content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        margin-bottom: 30px;
-    }
-
-    @media (max-width: 1200px) {
-        .content {
-            grid-template-columns: 1fr;
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(3, 102, 204, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
         }
-    }
 
-    /* Card */
-    .card {
-        background: var(--card-bg);
-        border-radius: 16px;
-        padding: 30px;
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        animation: fadeIn 0.6s ease-out;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
         }
-    }
 
-    .card h2 {
-        color: var(--primary);
-        margin-bottom: 20px;
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: 700;
-    }
-
-    .card h2::before {
-        content: '';
-        display: inline-block;
-        width: 5px;
-        height: 26px;
-        background: linear-gradient(180deg, var(--primary) 0%, var(--accent) 100%);
-        border-radius: 3px;
-    }
-
-    /* Form */
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: var(--text-dark);
-        font-size: 14px;
-    }
-
-    input, select, textarea {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid var(--border);
-        border-radius: 10px;
-        font-size: 14px;
-        transition: all 0.3s ease;
-        font-family: inherit;
-    }
-
-    input:focus, select:focus, textarea:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
-    }
-
-    /* Items Table */
-    .items-section {
-        grid-column: 1 / -1;
-    }
-
-    .table-wrapper {
-        overflow-x: auto;
-        border-radius: 12px;
-        border: 2px solid var(--border);
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th {
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-        color: white;
-        padding: 16px;
-        text-align: left;
-        font-weight: 700;
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 0.7px;
-    }
-
-    td {
-        padding: 16px;
-        border-bottom: 1px solid var(--border);
-    }
-
-    tr:hover {
-        background: var(--bg-light);
-    }
-
-    tr:last-child td {
-        border-bottom: none;
-    }
-
-    input[type="number"] {
-        width: 100%;
-        padding: 8px;
-    }
-
-    .action-buttons {
-        display: flex;
-        gap: 8px;
-    }
-
-    /* Summary */
-    .summary {
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-        color: white;
-        padding: 30px;
-        border-radius: 16px;
-        margin-bottom: 30px;
-        box-shadow: 0 8px 32px rgba(0, 102, 204, 0.2);
-    }
-
-    .summary-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-        font-size: 16px;
-    }
-
-    .summary-row.total {
-        border-top: 2px solid rgba(255, 255, 255, 0.3);
-        padding-top: 15px;
-        font-size: 24px;
-        font-weight: 800;
-    }
-
-    /* Button Group */
-    .button-group {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-bottom: 30px;
-    }
-
-    .button-group.export-group {
-        background: var(--card-bg);
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: var(--shadow);
-    }
-
-    .export-label {
-        font-weight: 700;
-        color: var(--primary);
-        width: 100%;
-        margin-bottom: 15px;
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    /* Modal */
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(10, 25, 41, 0.8);
-        z-index: 1000;
-        align-items: center;
-        justify-content: center;
-        backdrop-filter: blur(4px);
-    }
-
-    .modal.active {
-        display: flex;
-    }
-
-    .modal-content {
-        background: var(--card-bg);
-        padding: 40px;
-        border-radius: 16px;
-        max-width: 900px;
-        width: 90%;
-        box-shadow: 0 20px 60px rgba(10, 25, 41, 0.3);
-        animation: slideIn 0.3s ease-out;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    @keyframes slideIn {
-        from {
-            transform: translateY(-30px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-
-    .modal-content h3 {
-        color: var(--primary);
-        margin-bottom: 25px;
-        font-size: 22px;
-    }
-
-    .modal-buttons {
-        display: flex;
-        gap: 12px;
-        margin-top: 25px;
-        flex-wrap: wrap;
-    }
-
-    .modal-buttons button {
-        flex: 1;
-        min-width: 150px;
-    }
-
-    /* Quote Preview */
-    .quote-preview {
-        background: var(--bg-light);
-        padding: 40px;
-        border-radius: 12px;
-        font-size: 14px;
-        line-height: 1.8;
-    }
-
-    .quote-header {
-        text-align: center;
-        margin-bottom: 40px;
-        border-bottom: 3px solid var(--primary);
-        padding-bottom: 20px;
-    }
-
-    .quote-header h1 {
-        color: var(--primary);
-        font-size: 28px;
-        margin-bottom: 5px;
-    }
-
-    .quote-header p {
-        color: var(--text-light);
-        font-size: 13px;
-    }
-
-    .quote-info {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-bottom: 30px;
-        font-size: 13px;
-    }
-
-    .quote-info-item {
-        background: white;
-        padding: 15px;
-        border-radius: 8px;
-    }
-
-    .quote-info-label {
-        font-weight: 700;
-        color: var(--primary);
-        margin-bottom: 5px;
-    }
-
-    .quote-items {
-        margin: 30px 0;
-    }
-
-    .quote-items table {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .quote-items th {
-        background: var(--primary);
-        color: white;
-        padding: 12px;
-        text-align: left;
-        font-weight: 700;
-        font-size: 12px;
-    }
-
-    .quote-items td {
-        padding: 12px;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .quote-totals {
-        margin-top: 30px;
-        text-align: right;
-        width: 50%;
-        margin-left: auto;
-    }
-
-    .quote-total-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 12px 0;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .quote-total-row.final {
-        background: var(--primary);
-        color: white;
-        padding: 15px;
-        margin-top: 10px;
-        border-radius: 8px;
-        font-size: 18px;
-        font-weight: 700;
-        border: none;
-    }
-
-    .quote-footer {
-        margin-top: 40px;
-        padding-top: 20px;
-        border-top: 2px solid var(--border);
-        text-align: center;
-        color: var(--text-light);
-        font-size: 12px;
-    }
-
-    /* Alert */
-    .alert {
-        padding: 16px 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        display: none;
-        border-left: 4px solid;
-    }
-
-    .alert.show {
-        display: block;
-        animation: slideInAlert 0.3s ease-out;
-    }
-
-    @keyframes slideInAlert {
-        from {
-            transform: translateX(-20px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-
-    .alert-success {
-        background: #e7f6f0;
-        color: #0c5c4a;
-        border-color: #00cc66;
-    }
-
-    .alert-error {
-        background: #ffe7e7;
-        color: #8b0000;
-        border-color: #ff3333;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
         .header {
-            flex-direction: column;
-            align-items: flex-start;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            border: 1px solid rgba(0, 102, 204, 0.1);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-light);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .lang-toggle button {
+            padding: 10px 18px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 700;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .lang-toggle button:hover {
+            color: var(--primary);
+        }
+
+        .lang-toggle button.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 12px rgba(0, 102, 204, 0.2);
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(0, 204, 102, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 204, 102, 0.4);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #cc0000;
+        }
+
+        .btn-export {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-export:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-small {
+            padding: 8px 12px;
+            font-size: 12px;
         }
 
         .content {
-            grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .quote-info {
-            grid-template-columns: 1fr;
+        @media (max-width: 1200px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .quote-totals {
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+        }
+
+        .card h2::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 26px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 3px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        input, select, textarea {
             width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+        }
+
+        .items-section {
+            grid-column: 1 / -1;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: var(--bg-light);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 102, 204, 0.2);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .summary-row.total {
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            padding-top: 15px;
+            font-size: 24px;
+            font-weight: 800;
         }
 
         .button-group {
-            flex-direction: column;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
         }
 
-        .button-group button {
+        .button-group.export-group {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .export-label {
+            font-weight: 700;
+            color: var(--primary);
             width: 100%;
-        }
-    }
-
-    /* Print Styles */
-    @media print {
-        body {
-            background: white;
+            margin-bottom: 15px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .header, .card, button, .button-group {
+        .modal {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 25, 41, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 900px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(10, 25, 41, 0.3);
+            animation: slideIn 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            min-width: 150px;
         }
 
         .quote-preview {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .quote-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 20px;
+        }
+
+        .quote-header h1 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .quote-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+
+        .quote-info-item {
             background: white;
-            padding: 0;
+            padding: 15px;
+            border-radius: 8px;
         }
-    }
 
-    .hidden-lang {
-        display: none !important;
-    }
-
-    /* Calculation Highlight */
-    .calc-highlight {
-        animation: highlightPulse 0.6s ease-in-out;
-    }
-
-    @keyframes highlightPulse {
-        0% {
-            background: rgba(0, 204, 102, 0.3);
+        .quote-info-label {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
         }
-        50% {
-            background: rgba(0, 204, 102, 0.15);
+
+        .quote-items {
+            margin: 30px 0;
         }
-        100% {
-            background: transparent;
+
+        .quote-items table {
+            width: 100%;
+            margin-bottom: 20px;
         }
-    }
 
-    .calc-indicator {
-        display: inline-block;
-        font-size: 10px;
-        font-weight: 700;
-        color: var(--success);
-        margin-left: 8px;
-        animation: fadeInOut 0.8s ease-in-out;
-    }
-
-    @keyframes fadeInOut {
-        0% { opacity: 0; }
-        50% { opacity: 1; }
-        100% { opacity: 0; }
-    }
-
-    .summary-row span {
-        display: flex;
-        align-items: center;
-    }
-
-    .value-change {
-        animation: scaleUp 0.4s ease-out;
-    }
-
-    @keyframes scaleUp {
-        from {
-            transform: scale(1);
+        .quote-items th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 12px;
         }
-        to {
-            transform: scale(1.05);
-        }
-    }
-</style>
-```
 
+        .quote-items td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quote-totals {
+            margin-top: 30px;
+            text-align: right;
+            width: 50%;
+            margin-left: auto;
+        }
+
+        .quote-total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quote-total-row.final {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+        }
+
+        .quote-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            color: var(--text-light);
+            font-size: 12px;
+        }
+
+        .alert {
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid;
+        }
+
+        .alert.show {
+            display: block;
+            animation: slideInAlert 0.3s ease-out;
+        }
+
+        @keyframes slideInAlert {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .alert-success {
+            background: #e7f6f0;
+            color: #0c5c4a;
+            border-color: #00cc66;
+        }
+
+        .alert-error {
+            background: #ffe7e7;
+            color: #8b0000;
+            border-color: #ff3333;
+        }
+
+        .hidden-lang {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .content { grid-template-columns: 1fr; }
+            .quote-info { grid-template-columns: 1fr; }
+            .quote-totals { width: 100%; }
+            .button-group { flex-direction: column; }
+            .button-group button { width: 100%; }
+        }
+
+        @media print {
+            body { background: white; }
+            .header, .card, button, .button-group { display: none; }
+            .quote-preview { background: white; padding: 0; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <div>
                 <h1>🏗️ BuildQuote Pro</h1>
@@ -723,308 +583,263 @@
             </div>
         </div>
 
-```
-    <!-- Alert -->
-    <div id="alert" class="alert"></div>
+        <div id="alert" class="alert"></div>
 
-    <!-- Main Content -->
-    <div class="content">
-        <!-- Left: Client & Project Info -->
-        <div class="card">
-            <h2><span class="text-en">Client Information</span><span class="text-fr hidden-lang">Informations Client</span></h2>
+        <div class="content">
+            <div class="card">
+                <h2><span class="text-en">Client Information</span><span class="text-fr hidden-lang">Informations Client</span></h2>
+                
+                <div class="form-group">
+                    <label><span class="text-en">Company Name *</span><span class="text-fr hidden-lang">Nom de l'Entreprise *</span></label>
+                    <input type="text" id="clientName" placeholder="">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Contact (Name)</span><span class="text-fr hidden-lang">Contact (Nom)</span></label>
+                    <input type="text" id="contactName" placeholder="">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Phone</span><span class="text-fr hidden-lang">Téléphone</span></label>
+                    <input type="tel" id="phone" placeholder="">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Email</span><span class="text-fr hidden-lang">Email</span></label>
+                    <input type="email" id="email" placeholder="">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Project Address</span><span class="text-fr hidden-lang">Adresse Chantier</span></label>
+                    <textarea id="address" rows="3" placeholder=""></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Quote Number</span><span class="text-fr hidden-lang">Numéro de Devis</span></label>
+                    <input type="text" id="quoteNumber" placeholder="" value="QUOTE-2024-">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Quote Date</span><span class="text-fr hidden-lang">Date du Devis</span></label>
+                    <input type="date" id="quoteDate">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Expiration Date</span><span class="text-fr hidden-lang">Date d'Expiration</span></label>
+                    <input type="date" id="expiryDate">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Notes/Project Description</span><span class="text-fr hidden-lang">Notes/Description du Projet</span></label>
+                    <textarea id="projectNotes" rows="3" placeholder=""></textarea>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="text-en">Financial Settings</span><span class="text-fr hidden-lang">Paramètres Financiers</span></h2>
+                
+                <div class="form-group">
+                    <label><span class="text-en">Currency</span><span class="text-fr hidden-lang">Devise</span></label>
+                    <select id="currency">
+                        <option value="USD">USD ($)</option>
+                        <option value="BAH">BAH ($)</option>
+                        <option value="CAD">CAD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Tax/VAT Rate (%)</span><span class="text-fr hidden-lang">Taux de Taxe/TVA (%)</span></label>
+                    <input type="number" id="taxRate" value="0" step="0.01" min="0" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Global Discount (%)</span><span class="text-fr hidden-lang">Remise Globale (%)</span></label>
+                    <input type="number" id="discountRate" value="0" step="0.01" min="0" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Admin Fees ($)</span><span class="text-fr hidden-lang">Frais d'Administration ($)</span></label>
+                    <input type="number" id="adminFee" value="0" step="0.01" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Transport Fees ($)</span><span class="text-fr hidden-lang">Frais de Transport ($)</span></label>
+                    <input type="number" id="transportFee" value="0" step="0.01" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="text-en">Terms & Conditions</span><span class="text-fr hidden-lang">Notes Conditions</span></label>
+                    <textarea id="terms" rows="3" placeholder=""></textarea>
+                </div>
+
+                <button class="btn-secondary" onclick="loadSampleData()" style="width: 100%; margin-top: 20px;">
+                    <span class="text-en">📋 Load Sample Data</span>
+                    <span class="text-fr hidden-lang">📋 Charger Exemple</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="card items-section">
+            <h2><span class="text-en">Quote Items</span><span class="text-fr hidden-lang">Éléments du Devis</span></h2>
             
-            <div class="form-group">
-                <label><span class="text-en">Company Name *</span><span class="text-fr hidden-lang">Nom de l'Entreprise *</span></label>
-                <input type="text" id="clientName" placeholder="">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="text-en">Description</span><span class="text-fr hidden-lang">Description</span></th>
+                            <th style="width: 100px;"><span class="text-en">Qty</span><span class="text-fr hidden-lang">Quantité</span></th>
+                            <th style="width: 100px;"><span class="text-en">Unit</span><span class="text-fr hidden-lang">Unité</span></th>
+                            <th style="width: 120px;"><span class="text-en">Unit Price</span><span class="text-fr hidden-lang">Prix Unitaire</span></th>
+                            <th style="width: 100px;"><span class="text-en">Total</span><span class="text-fr hidden-lang">Total</span></th>
+                            <th style="width: 80px;"><span class="text-en">Action</span><span class="text-fr hidden-lang">Action</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsTable">
+                    </tbody>
+                </table>
             </div>
 
-            <div class="form-group">
-                <label><span class="text-en">Contact (Name)</span><span class="text-fr hidden-lang">Contact (Nom)</span></label>
-                <input type="text" id="contactName" placeholder="">
-            </div>
+            <button class="btn-primary" onclick="addItem()" style="margin-top: 20px; width: 100%;">
+                <span class="text-en">+ Add Item</span>
+                <span class="text-fr hidden-lang">+ Ajouter un Élément</span>
+            </button>
+        </div>
 
-            <div class="form-group">
-                <label><span class="text-en">Phone</span><span class="text-fr hidden-lang">Téléphone</span></label>
-                <input type="tel" id="phone" placeholder="">
+        <div class="summary">
+            <div class="summary-row">
+                <span><span class="text-en">Subtotal:</span><span class="text-fr hidden-lang">Sous-total:</span></span>
+                <strong id="subtotal">0.00</strong>
             </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Email</span><span class="text-fr hidden-lang">Email</span></label>
-                <input type="email" id="email" placeholder="">
+            <div class="summary-row" id="discountRow" style="display: none;">
+                <span><span class="text-en">Discount:</span><span class="text-fr hidden-lang">Remise:</span></span>
+                <strong id="discountAmount">0.00</strong>
             </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Project Address</span><span class="text-fr hidden-lang">Adresse Chantier</span></label>
-                <textarea id="address" rows="3" placeholder=""></textarea>
+            <div class="summary-row" id="adminRow" style="display: none;">
+                <span><span class="text-en">Admin Fees:</span><span class="text-fr hidden-lang">Frais Admin:</span></span>
+                <strong id="adminAmount">0.00</strong>
             </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Quote Number</span><span class="text-fr hidden-lang">Numéro de Devis</span></label>
-                <input type="text" id="quoteNumber" placeholder="" value="QUOTE-2024-">
+            <div class="summary-row" id="transportRow" style="display: none;">
+                <span><span class="text-en">Transport Fees:</span><span class="text-fr hidden-lang">Frais Transport:</span></span>
+                <strong id="transportAmount">0.00</strong>
             </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Quote Date</span><span class="text-fr hidden-lang">Date du Devis</span></label>
-                <input type="date" id="quoteDate">
+            <div class="summary-row" id="taxRow" style="display: none;">
+                <span><span class="text-en">Tax/VAT:</span><span class="text-fr hidden-lang">Taxe/TVA:</span></span>
+                <strong id="taxAmount">0.00</strong>
             </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Expiration Date</span><span class="text-fr hidden-lang">Date d'Expiration</span></label>
-                <input type="date" id="expiryDate">
-            </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Notes/Project Description</span><span class="text-fr hidden-lang">Notes/Description du Projet</span></label>
-                <textarea id="projectNotes" rows="3" placeholder=""></textarea>
+            <div class="summary-row total">
+                <span><span class="text-en">TOTAL DUE:</span><span class="text-fr hidden-lang">TOTAL À PAYER:</span></span>
+                <span id="total">0.00</span>
             </div>
         </div>
 
-        <!-- Right: Financials -->
-        <div class="card">
-            <h2><span class="text-en">Financial Settings</span><span class="text-fr hidden-lang">Paramètres Financiers</span></h2>
-            
-            <div class="form-group">
-                <label><span class="text-en">Currency</span><span class="text-fr hidden-lang">Devise</span></label>
-                <select id="currency">
-                    <option value="USD">USD ($)</option>
-                    <option value="BAH">BAH ($)</option>
-                    <option value="CAD">CAD ($)</option>
-                    <option value="EUR">EUR (€)</option>
-                </select>
-            </div>
+        <div class="button-group export-group">
+            <div class="export-label">📤 <span class="text-en">EXPORT & SHARE</span><span class="text-fr hidden-lang">EXPORTER & PARTAGER</span></div>
+            <button class="btn-primary" onclick="generatePDF()" style="flex: 1;">
+                <span class="text-en">📄 PDF</span>
+                <span class="text-fr hidden-lang">📄 PDF</span>
+            </button>
+            <button class="btn-export" onclick="exportToExcel()" style="flex: 1;">
+                <span class="text-en">📊 Excel</span>
+                <span class="text-fr hidden-lang">📊 Excel</span>
+            </button>
+            <button class="btn-export" onclick="exportToCSV()" style="flex: 1;">
+                <span class="text-en">📋 CSV</span>
+                <span class="text-fr hidden-lang">📋 CSV</span>
+            </button>
+        </div>
 
-            <div class="form-group">
-                <label><span class="text-en">Tax/VAT Rate (%)</span><span class="text-fr hidden-lang">Taux de Taxe/TVA (%)</span></label>
-                <input type="number" id="taxRate" value="0" step="0.01" min="0" max="100">
-            </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Global Discount (%)</span><span class="text-fr hidden-lang">Remise Globale (%)</span></label>
-                <input type="number" id="discountRate" value="0" step="0.01" min="0" max="100">
-            </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Admin Fees ($)</span><span class="text-fr hidden-lang">Frais d'Administration ($)</span></label>
-                <input type="number" id="adminFee" value="0" step="0.01" min="0">
-            </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Transport Fees ($)</span><span class="text-fr hidden-lang">Frais de Transport ($)</span></label>
-                <input type="number" id="transportFee" value="0" step="0.01" min="0">
-            </div>
-
-            <div class="form-group">
-                <label><span class="text-en">Terms & Conditions</span><span class="text-fr hidden-lang">Notes Conditions</span></label>
-                <textarea id="terms" rows="3" placeholder=""></textarea>
-            </div>
-
-            <button class="btn-secondary" onclick="loadSampleData()" style="width: 100%; margin-top: 20px;">
-                <span class="text-en">📋 Load Sample Data</span>
-                <span class="text-fr hidden-lang">📋 Charger Exemple</span>
+        <div class="button-group">
+            <button class="btn-success" onclick="saveQuote()" style="flex: 1;">
+                <span class="text-en">💾 Save Quote</span>
+                <span class="text-fr hidden-lang">💾 Enregistrer</span>
+            </button>
+            <button class="btn-secondary" onclick="openQuoteModal()" style="flex: 1;">
+                <span class="text-en">👁️ Preview</span>
+                <span class="text-fr hidden-lang">👁️ Aperçu</span>
+            </button>
+            <button class="btn-secondary" onclick="resetForm()" style="flex: 1;">
+                <span class="text-en">🔄 Reset</span>
+                <span class="text-fr hidden-lang">🔄 Réinitialiser</span>
             </button>
         </div>
     </div>
 
-    <!-- Items Section -->
-    <div class="card items-section">
-        <h2><span class="text-en">Quote Items</span><span class="text-fr hidden-lang">Éléments du Devis</span></h2>
-        
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th><span class="text-en">Description</span><span class="text-fr hidden-lang">Description</span></th>
-                        <th style="width: 100px;">
-                            <span class="text-en">Qty</span>
-                            <span class="text-fr hidden-lang">Quantité</span>
-                        </th>
-                        <th style="width: 100px;">
-                            <span class="text-en">Unit</span>
-                            <span class="text-fr hidden-lang">Unité</span>
-                        </th>
-                        <th style="width: 120px;">
-                            <span class="text-en">Unit Price</span>
-                            <span class="text-fr hidden-lang">Prix Unitaire</span>
-                        </th>
-                        <th style="width: 100px;">
-                            <span class="text-en">Total</span>
-                            <span class="text-fr hidden-lang">Total</span>
-                        </th>
-                        <th style="width: 80px;">
-                            <span class="text-en">Action</span>
-                            <span class="text-fr hidden-lang">Action</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="itemsTable">
-                </tbody>
-            </table>
-        </div>
-
-        <button class="btn-primary" onclick="addItem()" style="margin-top: 20px; width: 100%;">
-            <span class="text-en">+ Add Item</span>
-            <span class="text-fr hidden-lang">+ Ajouter un Élément</span>
-        </button>
-    </div>
-
-    <!-- Summary -->
-    <div class="summary">
-        <div class="summary-row">
-            <span><span class="text-en">Subtotal:</span><span class="text-fr hidden-lang">Sous-total:</span></span>
-            <strong id="subtotal">0.00</strong>
-        </div>
-        <div class="summary-row" id="discountRow" style="display: none;">
-            <span><span class="text-en">Discount:</span><span class="text-fr hidden-lang">Remise:</span></span>
-            <strong id="discountAmount">0.00</strong>
-        </div>
-        <div class="summary-row" id="adminRow" style="display: none;">
-            <span><span class="text-en">Admin Fees:</span><span class="text-fr hidden-lang">Frais Admin:</span></span>
-            <strong id="adminAmount">0.00</strong>
-        </div>
-        <div class="summary-row" id="transportRow" style="display: none;">
-            <span><span class="text-en">Transport Fees:</span><span class="text-fr hidden-lang">Frais Transport:</span></span>
-            <strong id="transportAmount">0.00</strong>
-        </div>
-        <div class="summary-row" id="taxRow" style="display: none;">
-            <span><span class="text-en">Tax/VAT:</span><span class="text-fr hidden-lang">Taxe/TVA:</span></span>
-            <strong id="taxAmount">0.00</strong>
-        </div>
-        <div class="summary-row total">
-            <span><span class="text-en">TOTAL DUE:</span><span class="text-fr hidden-lang">TOTAL À PAYER:</span></span>
-            <span id="total">0.00</span>
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <div id="quotePreviewContent"></div>
+            <div class="modal-buttons">
+                <button class="btn-primary" onclick="generatePDF()">
+                    <span class="text-en">📄 Download PDF</span>
+                    <span class="text-fr hidden-lang">📄 Télécharger PDF</span>
+                </button>
+                <button class="btn-export" onclick="exportToExcel()">
+                    <span class="text-en">📊 Export Excel</span>
+                    <span class="text-fr hidden-lang">📊 Exporter Excel</span>
+                </button>
+                <button class="btn-secondary" onclick="closeQuoteModal()">
+                    <span class="text-en">Close</span>
+                    <span class="text-fr hidden-lang">Fermer</span>
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Export Options -->
-    <div class="button-group export-group">
-        <div class="export-label">📤 <span class="text-en">EXPORT & SHARE</span><span class="text-fr hidden-lang">EXPORTER & PARTAGER</span></div>
-        <button class="btn-primary" onclick="generatePDF()" style="flex: 1;">
-            <span class="text-en">📄 PDF</span>
-            <span class="text-fr hidden-lang">📄 PDF</span>
-        </button>
-        <button class="btn-export" onclick="exportToExcel()" style="flex: 1;">
-            <span class="text-en">📊 Excel</span>
-            <span class="text-fr hidden-lang">📊 Excel</span>
-        </button>
-        <button class="btn-export" onclick="exportToCSV()" style="flex: 1;">
-            <span class="text-en">📋 CSV</span>
-            <span class="text-fr hidden-lang">📋 CSV</span>
-        </button>
-    </div>
+    <script>
+        let currentLanguage = 'en';
+        let items = [];
 
-    <!-- Action Buttons -->
-    <div class="button-group">
-        <button class="btn-success" onclick="saveQuote()" style="flex: 1;">
-            <span class="text-en">💾 Save Quote</span>
-            <span class="text-fr hidden-lang">💾 Enregistrer</span>
-        </button>
-        <button class="btn-secondary" onclick="openQuoteModal()" style="flex: 1;">
-            <span class="text-en">👁️ Preview</span>
-            <span class="text-fr hidden-lang">👁️ Aperçu</span>
-        </button>
-        <button class="btn-secondary" onclick="resetForm()" style="flex: 1;">
-            <span class="text-en">🔄 Reset</span>
-            <span class="text-fr hidden-lang">🔄 Réinitialiser</span>
-        </button>
-    </div>
-</div>
+        document.getElementById('quoteDate').valueAsDate = new Date();
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + 30);
+        document.getElementById('expiryDate').valueAsDate = expiryDate;
 
-<!-- Quote Preview Modal -->
-<div id="quoteModal" class="modal">
-    <div class="modal-content">
-        <div id="quotePreviewContent"></div>
-        <div class="modal-buttons">
-            <button class="btn-primary" onclick="generatePDF()">
-                <span class="text-en">📄 Download PDF</span>
-                <span class="text-fr hidden-lang">📄 Télécharger PDF</span>
-            </button>
-            <button class="btn-export" onclick="exportToExcel()">
-                <span class="text-en">📊 Export Excel</span>
-                <span class="text-fr hidden-lang">📊 Exporter Excel</span>
-            </button>
-            <button class="btn-secondary" onclick="closeQuoteModal()">
-                <span class="text-en">Close</span>
-                <span class="text-fr hidden-lang">Fermer</span>
-            </button>
-        </div>
-    </div>
-</div>
-
-<script>
-    let currentLanguage = 'en';
-    let items = [];
-
-    // Set current date
-    document.getElementById('quoteDate').valueAsDate = new Date();
-
-    // Add default expiry date (30 days)
-    const expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getDate() + 30);
-    document.getElementById('expiryDate').valueAsDate = expiryDate;
-
-    // Language system
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            currentLanguage = btn.dataset.lang;
-            
-            // Update active button
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // Update visible text
-            document.querySelectorAll('.text-en, .text-fr').forEach(el => {
-                el.classList.remove('hidden-lang');
-            });
-            document.querySelectorAll('.text-' + (currentLanguage === 'en' ? 'fr' : 'en')).forEach(el => {
-                el.classList.add('hidden-lang');
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLanguage = btn.dataset.lang;
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.text-en, .text-fr').forEach(el => {
+                    el.classList.remove('hidden-lang');
+                });
+                document.querySelectorAll('.text-' + (currentLanguage === 'en' ? 'fr' : 'en')).forEach(el => {
+                    el.classList.add('hidden-lang');
+                });
             });
         });
-    });
 
-    // Add item row
-    function addItem() {
-        const id = Date.now();
-        items.push({
-            id: id,
-            description: '',
-            quantity: 1,
-            unit: 'h',
-            price: 0
-        });
-        renderItems();
-    }
-
-    // Delete item
-    function deleteItem(id) {
-        items = items.filter(item => item.id !== id);
-        renderItems();
-    }
-
-    // Update item
-    function updateItem(id, field, value) {
-        const item = items.find(i => i.id === id);
-        if (item) {
-            item[field] = field === 'quantity' || field === 'price' ? parseFloat(value) || 0 : value;
+        function addItem() {
+            const id = Date.now();
+            items.push({
+                id: id,
+                description: '',
+                quantity: 1,
+                unit: 'h',
+                price: 0
+            });
             renderItems();
         }
-    }
 
-    // Render items table
-    function renderItems() {
-        const tbody = document.getElementById('itemsTable');
-        tbody.innerHTML = items.map(item => `
-            <tr>
-                <td>
-                    <input type="text" value="${item.description}" 
-                           onchange="updateItem(${item.id}, 'description', this.value)" 
-                           placeholder="">
-                </td>
-                <td>
-                    <input type="number" value="${item.quantity}" step="0.01" min="0"
-                           onchange="updateItem(${item.id}, 'quantity', this.value)">
-                </td>
-                <td>
-                    <select onchange="updateItem(${item.id}, 'unit', this.value)">
+        function deleteItem(id) {
+            items = items.filter(item => item.id !== id);
+            renderItems();
+        }
+
+        function updateItem(id, field, value) {
+            const item = items.find(i => i.id === id);
+            if (item) {
+                item[field] = field === 'quantity' || field === 'price' ? parseFloat(value) || 0 : value;
+                renderItems();
+            }
+        }
+
+        function renderItems() {
+            const tbody = document.getElementById('itemsTable');
+            tbody.innerHTML = items.map(item => `
+                <tr>
+                    <td><input type="text" value="${item.description}" onchange="updateItem(${item.id}, 'description', this.value)" placeholder=""></td>
+                    <td><input type="number" value="${item.quantity}" step="0.01" min="0" onchange="updateItem(${item.id}, 'quantity', this.value)"></td>
+                    <td><select onchange="updateItem(${item.id}, 'unit', this.value)">
                         <option value="h" ${item.unit === 'h' ? 'selected' : ''}>h</option>
                         <option value="m" ${item.unit === 'm' ? 'selected' : ''}>m</option>
                         <option value="m2" ${item.unit === 'm2' ? 'selected' : ''}>m²</option>
@@ -1032,490 +847,422 @@
                         <option value="pcs" ${item.unit === 'pcs' ? 'selected' : ''}>pcs</option>
                         <option value="kg" ${item.unit === 'kg' ? 'selected' : ''}>kg</option>
                         <option value="l" ${item.unit === 'l' ? 'selected' : ''}>l</option>
-                    </select>
-                </td>
-                <td>
-                    <input type="number" value="${item.price.toFixed(2)}" step="0.01" min="0"
-                           onchange="updateItem(${item.id}, 'price', this.value)">
-                </td>
-                <td>${(item.quantity * item.price).toFixed(2)}</td>
-                <td>
-                    <button class="btn-danger btn-small" onclick="deleteItem(${item.id})">
-                        <span class="text-en">✕</span>
-                        <span class="text-fr hidden-lang">✕</span>
-                    </button>
-                </td>
-            </tr>
-        `).join('');
-        updateSummary();
-    }
-
-    // Update summary
-    function updateSummary() {
-        const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-        const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
-        const discountRate = parseFloat(document.getElementById('discountRate').value) || 0;
-        const adminFee = parseFloat(document.getElementById('adminFee').value) || 0;
-        const transportFee = parseFloat(document.getElementById('transportFee').value) || 0;
-
-        const discountAmount = subtotal * (discountRate / 100);
-        const afterDiscount = subtotal - discountAmount;
-        const withFees = afterDiscount + adminFee + transportFee;
-        const taxAmount = withFees * (taxRate / 100);
-        const total = withFees + taxAmount;
-
-        // Update with animation
-        updateWithAnimation(document.getElementById('subtotal'), subtotal.toFixed(2));
-        updateWithAnimation(document.getElementById('discountAmount'), discountAmount.toFixed(2));
-        updateWithAnimation(document.getElementById('adminAmount'), adminFee.toFixed(2));
-        updateWithAnimation(document.getElementById('transportAmount'), transportFee.toFixed(2));
-        updateWithAnimation(document.getElementById('taxAmount'), taxAmount.toFixed(2));
-        updateWithAnimation(document.getElementById('total'), total.toFixed(2));
-
-        document.getElementById('discountRow').style.display = discountAmount > 0 ? 'flex' : 'none';
-        document.getElementById('adminRow').style.display = adminFee > 0 ? 'flex' : 'none';
-        document.getElementById('transportRow').style.display = transportFee > 0 ? 'flex' : 'none';
-        document.getElementById('taxRow').style.display = taxAmount > 0 ? 'flex' : 'none';
-
-        // Highlight summary
-        document.querySelector('.summary').classList.add('calc-highlight');
-    }
-
-    function updateWithAnimation(element, value) {
-        if (element.textContent !== value) {
-            element.textContent = value;
-            element.classList.add('value-change');
-            setTimeout(() => {
-                element.classList.remove('value-change');
-            }, 400);
-        }
-    }
-
-    // Event listeners for financial updates
-    ['taxRate', 'discountRate', 'adminFee', 'transportFee'].forEach(id => {
-        document.getElementById(id).addEventListener('change', updateSummary);
-    });
-
-    // Generate PDF
-    function generatePDF() {
-        const element = document.getElementById('quotePreviewContent');
-        if (!element.innerHTML) {
-            showAlert(currentLanguage === 'en' ? 'Please generate preview first' : 'Veuillez d\'abord générer l\'aperçu', 'error');
-            return;
+                    </select></td>
+                    <td><input type="number" value="${item.price.toFixed(2)}" step="0.01" min="0" onchange="updateItem(${item.id}, 'price', this.value)"></td>
+                    <td>${(item.quantity * item.price).toFixed(2)}</td>
+                    <td><button class="btn-danger btn-small" onclick="deleteItem(${item.id})"><span class="text-en">✕</span><span class="text-fr hidden-lang">✕</span></button></td>
+                </tr>
+            `).join('');
+            updateSummary();
         }
 
-        const opt = {
-            margin: 10,
-            filename: `Quote_${document.getElementById('quoteNumber').value}.pdf`,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-        };
+        function updateSummary() {
+            const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+            const discountRate = parseFloat(document.getElementById('discountRate').value) || 0;
+            const adminFee = parseFloat(document.getElementById('adminFee').value) || 0;
+            const transportFee = parseFloat(document.getElementById('transportFee').value) || 0;
 
-        html2pdf().set(opt).from(element).save();
-        showAlert(currentLanguage === 'en' ? 'PDF generated successfully!' : 'PDF généré avec succès!', 'success');
-    }
+            const discountAmount = subtotal * (discountRate / 100);
+            const afterDiscount = subtotal - discountAmount;
+            const withFees = afterDiscount + adminFee + transportFee;
+            const taxAmount = withFees * (taxRate / 100);
+            const total = withFees + taxAmount;
 
-    // Export to Excel
-    function exportToExcel() {
-        if (items.length === 0 || !document.getElementById('clientName').value) {
-            showAlert(currentLanguage === 'en' ? 'Please fill required fields' : 'Veuillez remplir les champs requis', 'error');
-            return;
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('discountAmount').textContent = discountAmount.toFixed(2);
+            document.getElementById('adminAmount').textContent = adminFee.toFixed(2);
+            document.getElementById('transportAmount').textContent = transportFee.toFixed(2);
+            document.getElementById('taxAmount').textContent = taxAmount.toFixed(2);
+            document.getElementById('total').textContent = total.toFixed(2);
+
+            document.getElementById('discountRow').style.display = discountAmount > 0 ? 'flex' : 'none';
+            document.getElementById('adminRow').style.display = adminFee > 0 ? 'flex' : 'none';
+            document.getElementById('transportRow').style.display = transportFee > 0 ? 'flex' : 'none';
+            document.getElementById('taxRow').style.display = taxAmount > 0 ? 'flex' : 'none';
         }
 
-        const wb = XLSX.utils.book_new();
-
-        // Summary sheet
-        const summaryData = [
-            ['BUILDQUOTE PRO - PROFESSIONAL QUOTE'],
-            [],
-            ['CLIENT INFORMATION'],
-            ['Company Name', document.getElementById('clientName').value],
-            ['Contact', document.getElementById('contactName').value],
-            ['Phone', document.getElementById('phone').value],
-            ['Email', document.getElementById('email').value],
-            ['Address', document.getElementById('address').value],
-            [],
-            ['QUOTE DETAILS'],
-            ['Quote Number', document.getElementById('quoteNumber').value],
-            ['Quote Date', document.getElementById('quoteDate').value],
-            ['Expiration Date', document.getElementById('expiryDate').value],
-            [],
-            ['ITEMS'],
-        ];
-
-        // Add items
-        summaryData.push(['Description', 'Quantity', 'Unit', 'Unit Price', 'Total']);
-        items.forEach(item => {
-            summaryData.push([
-                item.description,
-                item.quantity,
-                item.unit,
-                item.price.toFixed(2),
-                (item.quantity * item.price).toFixed(2)
-            ]);
+        ['taxRate', 'discountRate', 'adminFee', 'transportFee'].forEach(id => {
+            document.getElementById(id).addEventListener('change', updateSummary);
         });
 
-        const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-        const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
-        const discountRate = parseFloat(document.getElementById('discountRate').value) || 0;
-        const adminFee = parseFloat(document.getElementById('adminFee').value) || 0;
-        const transportFee = parseFloat(document.getElementById('transportFee').value) || 0;
+        function generatePDF() {
+            const element = document.getElementById('quotePreviewContent');
+            if (!element.innerHTML) {
+                showAlert(currentLanguage === 'en' ? 'Please generate preview first' : 'Veuillez d\'abord générer l\'aperçu', 'error');
+                return;
+            }
 
-        const discountAmount = subtotal * (discountRate / 100);
-        const afterDiscount = subtotal - discountAmount;
-        const withFees = afterDiscount + adminFee + transportFee;
-        const taxAmount = withFees * (taxRate / 100);
-        const total = withFees + taxAmount;
+            const opt = {
+                margin: 10,
+                filename: `Quote_${document.getElementById('quoteNumber').value}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+            };
 
-        summaryData.push([]);
-        summaryData.push(['Subtotal', '', '', '', subtotal.toFixed(2)]);
-        if (discountAmount > 0) summaryData.push(['Discount', '', '', '', discountAmount.toFixed(2)]);
-        if (adminFee > 0) summaryData.push(['Admin Fees', '', '', '', adminFee.toFixed(2)]);
-        if (transportFee > 0) summaryData.push(['Transport Fees', '', '', '', transportFee.toFixed(2)]);
-        if (taxAmount > 0) summaryData.push(['Tax/VAT', '', '', '', taxAmount.toFixed(2)]);
-        summaryData.push(['TOTAL', '', '', '', total.toFixed(2)]);
-
-        const ws = XLSX.utils.aoa_to_sheet(summaryData);
-        XLSX.utils.book_append_sheet(wb, ws, 'Quote');
-
-        XLSX.writeFile(wb, `Quote_${document.getElementById('quoteNumber').value}.xlsx`);
-        showAlert(currentLanguage === 'en' ? 'Excel file exported successfully!' : 'Fichier Excel exporté avec succès!', 'success');
-    }
-
-    // Export to CSV
-    function exportToCSV() {
-        if (items.length === 0 || !document.getElementById('clientName').value) {
-            showAlert(currentLanguage === 'en' ? 'Please fill required fields' : 'Veuillez remplir les champs requis', 'error');
-            return;
+            html2pdf().set(opt).from(element).save();
+            showAlert(currentLanguage === 'en' ? 'PDF generated successfully!' : 'PDF généré avec succès!', 'success');
         }
 
-        let csv = 'BUILDQUOTE PRO - PROFESSIONAL QUOTE\n\n';
-        csv += 'CLIENT INFORMATION\n';
-        csv += `Company Name,${document.getElementById('clientName').value}\n`;
-        csv += `Contact,${document.getElementById('contactName').value}\n`;
-        csv += `Phone,${document.getElementById('phone').value}\n`;
-        csv += `Email,${document.getElementById('email').value}\n`;
-        csv += `Address,${document.getElementById('address').value}\n\n`;
+        function generateQuoteHTML() {
+            const clientName = document.getElementById('clientName').value || 'N/A';
+            const contactName = document.getElementById('contactName').value || 'N/A';
+            const phone = document.getElementById('phone').value || 'N/A';
+            const email = document.getElementById('email').value || 'N/A';
+            const address = document.getElementById('address').value || 'N/A';
+            const quoteNumber = document.getElementById('quoteNumber').value || 'N/A';
+            const quoteDate = document.getElementById('quoteDate').value || 'N/A';
+            const expiryDate = document.getElementById('expiryDate').value || 'N/A';
+            const projectNotes = document.getElementById('projectNotes').value || '';
+            const currency = document.getElementById('currency').value;
+            const terms = document.getElementById('terms').value || '';
 
-        csv += 'QUOTE DETAILS\n';
-        csv += `Quote Number,${document.getElementById('quoteNumber').value}\n`;
-        csv += `Quote Date,${document.getElementById('quoteDate').value}\n`;
-        csv += `Expiration Date,${document.getElementById('expiryDate').value}\n\n`;
+            const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+            const discountRate = parseFloat(document.getElementById('discountRate').value) || 0;
+            const adminFee = parseFloat(document.getElementById('adminFee').value) || 0;
+            const transportFee = parseFloat(document.getElementById('transportFee').value) || 0;
 
-        csv += 'ITEMS\n';
-        csv += 'Description,Quantity,Unit,Unit Price,Total\n';
-        items.forEach(item => {
-            csv += `"${item.description}",${item.quantity},${item.unit},${item.price.toFixed(2)},${(item.quantity * item.price).toFixed(2)}\n`;
-        });
+            const discountAmount = subtotal * (discountRate / 100);
+            const afterDiscount = subtotal - discountAmount;
+            const withFees = afterDiscount + adminFee + transportFee;
+            const taxAmount = withFees * (taxRate / 100);
+            const total = withFees + taxAmount;
 
-        const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-        const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
-        const discountRate = parseFloat(document.getElementById('discountRate').value) || 0;
-        const adminFee = parseFloat(document.getElementById('adminFee').value) || 0;
-        const transportFee = parseFloat(document.getElementById('transportFee').value) || 0;
+            const currencySymbol = { 'USD': '$', 'BAH': '$', 'CAD': '$', 'EUR': '€' }[currency] || '$';
 
-        const discountAmount = subtotal * (discountRate / 100);
-        const afterDiscount = subtotal - discountAmount;
-        const withFees = afterDiscount + adminFee + transportFee;
-        const taxAmount = withFees * (taxRate / 100);
-        const total = withFees + taxAmount;
+            const itemsHTML = items.map(item => `
+                <tr>
+                    <td>${item.description}</td>
+                    <td style="text-align: center;">${item.quantity}</td>
+                    <td style="text-align: center;">${item.unit}</td>
+                    <td style="text-align: right;">${currencySymbol}${item.price.toFixed(2)}</td>
+                    <td style="text-align: right;">${currencySymbol}${(item.quantity * item.price).toFixed(2)}</td>
+                </tr>
+            `).join('');
 
-        csv += '\nSUMMARY\n';
-        csv += `Subtotal,,,,${subtotal.toFixed(2)}\n`;
-        if (discountAmount > 0) csv += `Discount,,,,${discountAmount.toFixed(2)}\n`;
-        if (adminFee > 0) csv += `Admin Fees,,,,${adminFee.toFixed(2)}\n`;
-        if (transportFee > 0) csv += `Transport Fees,,,,${transportFee.toFixed(2)}\n`;
-        if (taxAmount > 0) csv += `Tax/VAT,,,,${taxAmount.toFixed(2)}\n`;
-        csv += `TOTAL,,,,${total.toFixed(2)}\n`;
+            const headerText = currentLanguage === 'en' ? 'PROFESSIONAL QUOTE' : 'DEVIS PROFESSIONNEL';
+            const quoteLabel = currentLanguage === 'en' ? 'QUOTE:' : 'DEVIS:';
+            const companyLabel = currentLanguage === 'en' ? 'COMPANY:' : 'ENTREPRISE:';
+            const addressLabel = currentLanguage === 'en' ? 'PROJECT ADDRESS:' : 'ADRESSE DU CHANTIER:';
 
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = `Quote_${document.getElementById('quoteNumber').value}.csv`;
-        link.click();
+            return `
+                <div class="quote-preview">
+                    <div class="quote-header">
+                        <h1>${headerText}</h1>
+                    </div>
 
-        showAlert(currentLanguage === 'en' ? 'CSV file exported successfully!' : 'Fichier CSV exporté avec succès!', 'success');
-    }
-
-    // Generate quote preview
-    function generateQuoteHTML() {
-        const clientName = document.getElementById('clientName').value || 'N/A';
-        const contactName = document.getElementById('contactName').value || 'N/A';
-        const phone = document.getElementById('phone').value || 'N/A';
-        const email = document.getElementById('email').value || 'N/A';
-        const address = document.getElementById('address').value || 'N/A';
-        const quoteNumber = document.getElementById('quoteNumber').value || 'N/A';
-        const quoteDate = document.getElementById('quoteDate').value || 'N/A';
-        const expiryDate = document.getElementById('expiryDate').value || 'N/A';
-        const projectNotes = document.getElementById('projectNotes').value || '';
-        const currency = document.getElementById('currency').value;
-        const terms = document.getElementById('terms').value || '';
-
-        const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-        const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
-        const discountRate = parseFloat(document.getElementById('discountRate').value) || 0;
-        const adminFee = parseFloat(document.getElementById('adminFee').value) || 0;
-        const transportFee = parseFloat(document.getElementById('transportFee').value) || 0;
-
-        const discountAmount = subtotal * (discountRate / 100);
-        const afterDiscount = subtotal - discountAmount;
-        const withFees = afterDiscount + adminFee + transportFee;
-        const taxAmount = withFees * (taxRate / 100);
-        const total = withFees + taxAmount;
-
-        const currencySymbol = { 'USD': '$', 'BAH': '$', 'CAD': '$', 'EUR': '€' }[currency] || '$';
-
-        const itemsHTML = items.map(item => `
-            <tr>
-                <td>${item.description}</td>
-                <td style="text-align: center;">${item.quantity}</td>
-                <td style="text-align: center;">${item.unit}</td>
-                <td style="text-align: right;">${currencySymbol}${item.price.toFixed(2)}</td>
-                <td style="text-align: right;">${currencySymbol}${(item.quantity * item.price).toFixed(2)}</td>
-            </tr>
-        `).join('');
-
-        const headerText = currentLanguage === 'en' ? 'PROFESSIONAL QUOTE' : 'DEVIS PROFESSIONNEL';
-        const quoteLabel = currentLanguage === 'en' ? 'QUOTE:' : 'DEVIS:';
-        const companyLabel = currentLanguage === 'en' ? 'COMPANY:' : 'ENTREPRISE:';
-        const addressLabel = currentLanguage === 'en' ? 'PROJECT ADDRESS:' : 'ADRESSE DU CHANTIER:';
-        const notesLabel = currentLanguage === 'en' ? 'Notes:' : 'Notes:';
-        const descLabel = currentLanguage === 'en' ? 'Description' : 'Description';
-        const qtyLabel = currentLanguage === 'en' ? 'Qty' : 'Qty';
-        const unitLabel = currentLanguage === 'en' ? 'Unit' : 'Unit';
-        const priceLabel = currentLanguage === 'en' ? 'Unit Price' : 'P.U.';
-        const totalLabel = currentLanguage === 'en' ? 'Total' : 'Total';
-        const subtotalLabel = currentLanguage === 'en' ? 'Subtotal:' : 'Sous-total:';
-        const discountLabel = currentLanguage === 'en' ? 'Discount:' : 'Remise:';
-        const adminLabel = currentLanguage === 'en' ? 'Admin Fees:' : 'Frais Admin:';
-        const transportLabel = currentLanguage === 'en' ? 'Transport:' : 'Frais Transport:';
-        const taxLabel = currentLanguage === 'en' ? 'Tax/VAT:' : 'Taxe/TVA:';
-        const totalDueLabel = currentLanguage === 'en' ? 'TOTAL DUE:' : 'TOTAL À PAYER:';
-        const conditionsLabel = currentLanguage === 'en' ? 'Terms:' : 'Conditions:';
-        const validityLabel = currentLanguage === 'en' ? 'This quote is valid until the expiration date shown above.' : 'Ce devis est valide jusqu\'à la date d\'expiration indiquée ci-dessus.';
-        const generatedLabel = currentLanguage === 'en' ? 'Generated by BuildQuote Pro - Bahamas' : 'Généré par BuildQuote Pro - Bahamas';
-
-        return `
-            <div class="quote-preview">
-                <div class="quote-header">
-                    <h1>${headerText}</h1>
-                </div>
-
-                <div class="quote-info">
-                    <div class="quote-info-item">
-                        <div class="quote-info-label">${companyLabel}</div>
-                        <div><strong>${clientName}</strong></div>
-                        <div style="font-size: 12px; margin-top: 8px;">
-                            ${currentLanguage === 'en' ? 'Contact:' : 'Contact:'} ${contactName}<br>
-                            ${currentLanguage === 'en' ? 'Phone:' : 'Tél:'} ${phone}<br>
-                            Email: ${email}
+                    <div class="quote-info">
+                        <div class="quote-info-item">
+                            <div class="quote-info-label">${companyLabel}</div>
+                            <div><strong>${clientName}</strong></div>
+                            <div style="font-size: 12px; margin-top: 8px;">
+                                ${currentLanguage === 'en' ? 'Contact:' : 'Contact:'} ${contactName}<br>
+                                ${currentLanguage === 'en' ? 'Phone:' : 'Tél:'} ${phone}<br>
+                                Email: ${email}
+                            </div>
+                        </div>
+                        <div class="quote-info-item">
+                            <div class="quote-info-label">${quoteLabel}</div>
+                            <div><strong># ${quoteNumber}</strong></div>
+                            <div style="font-size: 12px; margin-top: 8px;">
+                                ${currentLanguage === 'en' ? 'Date:' : 'Date:'} ${quoteDate}<br>
+                                ${currentLanguage === 'en' ? 'Expires:' : 'Expire le:'} ${expiryDate}
+                            </div>
                         </div>
                     </div>
-                    <div class="quote-info-item">
-                        <div class="quote-info-label">${quoteLabel}</div>
-                        <div><strong># ${quoteNumber}</strong></div>
-                        <div style="font-size: 12px; margin-top: 8px;">
-                            ${currentLanguage === 'en' ? 'Date:' : 'Date:'} ${quoteDate}<br>
-                            ${currentLanguage === 'en' ? 'Expires:' : 'Expire le:'} ${expiryDate}
+
+                    <div class="quote-info">
+                        <div class="quote-info-item" style="grid-column: 1/-1;">
+                            <div class="quote-info-label">${addressLabel}</div>
+                            <div>${address}</div>
+                            ${projectNotes ? `<div style="margin-top: 10px; font-size: 12px;"><strong>${currentLanguage === 'en' ? 'Notes:' : 'Notes:'}</strong> ${projectNotes}</div>` : ''}
                         </div>
                     </div>
-                </div>
 
-                <div class="quote-info">
-                    <div class="quote-info-item" style="grid-column: 1/-1;">
-                        <div class="quote-info-label">${addressLabel}</div>
-                        <div>${address}</div>
-                        ${projectNotes ? `<div style="margin-top: 10px; font-size: 12px;"><strong>${notesLabel}</strong> ${projectNotes}</div>` : ''}
+                    <div class="quote-items">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>${currentLanguage === 'en' ? 'Description' : 'Description'}</th>
+                                    <th style="width: 80px; text-align: center;">${currentLanguage === 'en' ? 'Qty' : 'Qty'}</th>
+                                    <th style="width: 80px; text-align: center;">${currentLanguage === 'en' ? 'Unit' : 'Unit'}</th>
+                                    <th style="width: 100px; text-align: right;">${currentLanguage === 'en' ? 'Unit Price' : 'P.U.'}</th>
+                                    <th style="width: 100px; text-align: right;">${currentLanguage === 'en' ? 'Total' : 'Total'}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${itemsHTML}
+                            </tbody>
+                        </table>
                     </div>
-                </div>
 
-                <div class="quote-items">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>${descLabel}</th>
-                                <th style="width: 80px; text-align: center;">${qtyLabel}</th>
-                                <th style="width: 80px; text-align: center;">${unitLabel}</th>
-                                <th style="width: 100px; text-align: right;">${priceLabel}</th>
-                                <th style="width: 100px; text-align: right;">${totalLabel}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${itemsHTML}
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="quote-totals">
-                    <div class="quote-total-row">
-                        <span>${subtotalLabel}</span>
-                        <span>${currencySymbol}${subtotal.toFixed(2)}</span>
+                    <div class="quote-totals">
+                        <div class="quote-total-row">
+                            <span>${currentLanguage === 'en' ? 'Subtotal:' : 'Sous-total:'}</span>
+                            <span>${currencySymbol}${subtotal.toFixed(2)}</span>
+                        </div>
+                        ${discountAmount > 0 ? `
+                        <div class="quote-total-row">
+                            <span>${currentLanguage === 'en' ? 'Discount:' : 'Remise:'}</span>
+                            <span>-${currencySymbol}${discountAmount.toFixed(2)}</span>
+                        </div>
+                        ` : ''}
+                        ${adminFee > 0 ? `
+                        <div class="quote-total-row">
+                            <span>${currentLanguage === 'en' ? 'Admin Fees:' : 'Frais Admin:'}</span>
+                            <span>${currencySymbol}${adminFee.toFixed(2)}</span>
+                        </div>
+                        ` : ''}
+                        ${transportFee > 0 ? `
+                        <div class="quote-total-row">
+                            <span>${currentLanguage === 'en' ? 'Transport:' : 'Frais Transport:'}</span>
+                            <span>${currencySymbol}${transportFee.toFixed(2)}</span>
+                        </div>
+                        ` : ''}
+                        ${taxAmount > 0 ? `
+                        <div class="quote-total-row">
+                            <span>${currentLanguage === 'en' ? 'Tax/VAT:' : 'Taxe/TVA:'}</span>
+                            <span>${currencySymbol}${taxAmount.toFixed(2)}</span>
+                        </div>
+                        ` : ''}
+                        <div class="quote-total-row final">
+                            <span>${currentLanguage === 'en' ? 'TOTAL DUE:' : 'TOTAL À PAYER:'}</span>
+                            <span>${currencySymbol}${total.toFixed(2)}</span>
+                        </div>
                     </div>
-                    ${discountAmount > 0 ? `
-                    <div class="quote-total-row">
-                        <span>${discountLabel}</span>
-                        <span>-${currencySymbol}${discountAmount.toFixed(2)}</span>
+
+                    ${terms ? `
+                    <div class="quote-footer">
+                        <strong>${currentLanguage === 'en' ? 'Terms:' : 'Conditions:'}</strong><br>
+                        ${terms}
                     </div>
                     ` : ''}
-                    ${adminFee > 0 ? `
-                    <div class="quote-total-row">
-                        <span>${adminLabel}</span>
-                        <span>${currencySymbol}${adminFee.toFixed(2)}</span>
-                    </div>
-                    ` : ''}
-                    ${transportFee > 0 ? `
-                    <div class="quote-total-row">
-                        <span>${transportLabel}</span>
-                        <span>${currencySymbol}${transportFee.toFixed(2)}</span>
-                    </div>
-                    ` : ''}
-                    ${taxAmount > 0 ? `
-                    <div class="quote-total-row">
-                        <span>${taxLabel}</span>
-                        <span>${currencySymbol}${taxAmount.toFixed(2)}</span>
-                    </div>
-                    ` : ''}
-                    <div class="quote-total-row final">
-                        <span>${totalDueLabel}</span>
-                        <span>${currencySymbol}${total.toFixed(2)}</span>
+
+                    <div class="quote-footer">
+                        <p>${currentLanguage === 'en' ? 'This quote is valid until the expiration date shown above.' : 'Ce devis est valide jusqu\'à la date d\'expiration indiquée ci-dessus.'}</p>
+                        <p>${currentLanguage === 'en' ? 'Generated by BuildQuote Pro - Bahamas' : 'Généré par BuildQuote Pro - Bahamas'}</p>
                     </div>
                 </div>
-
-                ${terms ? `
-                <div class="quote-footer">
-                    <strong>${conditionsLabel}</strong><br>
-                    ${terms}
-                </div>
-                ` : ''}
-
-                <div class="quote-footer">
-                    <p>${validityLabel}</p>
-                    <p>${generatedLabel}</p>
-                </div>
-            </div>
-        `;
-    }
-
-    // Open quote modal
-    function openQuoteModal() {
-        if (items.length === 0) {
-            showAlert(currentLanguage === 'en' ? 'Please add items' : 'Veuillez ajouter des éléments', 'error');
-            return;
-        }
-        if (!document.getElementById('clientName').value) {
-            showAlert(currentLanguage === 'en' ? 'Please enter client name' : 'Veuillez entrer le nom du client', 'error');
-            return;
+            `;
         }
 
-        document.getElementById('quotePreviewContent').innerHTML = generateQuoteHTML();
-        document.getElementById('quoteModal').classList.add('active');
-    }
+        function openQuoteModal() {
+            if (items.length === 0) {
+                showAlert(currentLanguage === 'en' ? 'Please add items' : 'Veuillez ajouter des éléments', 'error');
+                return;
+            }
+            if (!document.getElementById('clientName').value) {
+                showAlert(currentLanguage === 'en' ? 'Please enter client name' : 'Veuillez entrer le nom du client', 'error');
+                return;
+            }
 
-    // Close quote modal
-    function closeQuoteModal() {
-        document.getElementById('quoteModal').classList.remove('active');
-    }
-
-    // Save quote
-    function saveQuote() {
-        if (items.length === 0 || !document.getElementById('clientName').value) {
-            showAlert(currentLanguage === 'en' ? 'Please fill required fields' : 'Veuillez remplir les champs requis', 'error');
-            return;
+            document.getElementById('quotePreviewContent').innerHTML = generateQuoteHTML();
+            document.getElementById('quoteModal').classList.add('active');
         }
 
-        const quoteData = {
-            clientName: document.getElementById('clientName').value,
-            contactName: document.getElementById('contactName').value,
-            phone: document.getElementById('phone').value,
-            email: document.getElementById('email').value,
-            address: document.getElementById('address').value,
-            quoteNumber: document.getElementById('quoteNumber').value,
-            quoteDate: document.getElementById('quoteDate').value,
-            expiryDate: document.getElementById('expiryDate').value,
-            projectNotes: document.getElementById('projectNotes').value,
-            currency: document.getElementById('currency').value,
-            taxRate: document.getElementById('taxRate').value,
-            discountRate: document.getElementById('discountRate').value,
-            adminFee: document.getElementById('adminFee').value,
-            transportFee: document.getElementById('transportFee').value,
-            terms: document.getElementById('terms').value,
-            items: items,
-            savedAt: new Date().toISOString()
-        };
+        function closeQuoteModal() {
+            document.getElementById('quoteModal').classList.remove('active');
+        }
 
-        const quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
-        quotes.push(quoteData);
-        localStorage.setItem('quotes', JSON.stringify(quotes));
+        function saveQuote() {
+            if (items.length === 0 || !document.getElementById('clientName').value) {
+                showAlert(currentLanguage === 'en' ? 'Please fill required fields' : 'Veuillez remplir les champs requis', 'error');
+                return;
+            }
 
-        showAlert(currentLanguage === 'en' ? 'Quote saved successfully!' : 'Devis enregistré avec succès!', 'success');
-    }
+            const quoteData = {
+                clientName: document.getElementById('clientName').value,
+                contactName: document.getElementById('contactName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                quoteNumber: document.getElementById('quoteNumber').value,
+                quoteDate: document.getElementById('quoteDate').value,
+                expiryDate: document.getElementById('expiryDate').value,
+                projectNotes: document.getElementById('projectNotes').value,
+                currency: document.getElementById('currency').value,
+                taxRate: document.getElementById('taxRate').value,
+                discountRate: document.getElementById('discountRate').value,
+                adminFee: document.getElementById('adminFee').value,
+                transportFee: document.getElementById('transportFee').value,
+                terms: document.getElementById('terms').value,
+                items: items,
+                savedAt: new Date().toISOString()
+            };
 
-    // Reset form
-    function resetForm() {
-        if (confirm(currentLanguage === 'en' ? 'Are you sure?' : 'Êtes-vous sûr?')) {
-            items = [];
-            document.getElementById('clientName').value = '';
-            document.getElementById('contactName').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('address').value = '';
-            document.getElementById('projectNotes').value = '';
-            document.getElementById('taxRate').value = '0';
-            document.getElementById('discountRate').value = '0';
-            document.getElementById('adminFee').value = '0';
-            document.getElementById('transportFee').value = '0';
-            document.getElementById('terms').value = '';
+            const quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+            quotes.push(quoteData);
+            localStorage.setItem('quotes', JSON.stringify(quotes));
+
+            showAlert(currentLanguage === 'en' ? 'Quote saved successfully!' : 'Devis enregistré avec succès!', 'success');
+        }
+
+        function resetForm() {
+            if (confirm(currentLanguage === 'en' ? 'Are you sure?' : 'Êtes-vous sûr?')) {
+                items = [];
+                document.getElementById('clientName').value = '';
+                document.getElementById('contactName').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('address').value = '';
+                document.getElementById('projectNotes').value = '';
+                document.getElementById('taxRate').value = '0';
+                document.getElementById('discountRate').value = '0';
+                document.getElementById('adminFee').value = '0';
+                document.getElementById('transportFee').value = '0';
+                document.getElementById('terms').value = '';
+                renderItems();
+                document.getElementById('quoteNumber').value = 'QUOTE-2024-';
+                document.getElementById('quoteDate').valueAsDate = new Date();
+                const expiryDate = new Date();
+                expiryDate.setDate(expiryDate.getDate() + 30);
+                document.getElementById('expiryDate').valueAsDate = expiryDate;
+            }
+        }
+
+        function loadSampleData() {
+            document.getElementById('clientName').value = 'BAHAMA CONSTRUCTION LTD';
+            document.getElementById('contactName').value = 'Mr. Johnson Smith';
+            document.getElementById('phone').value = '+242-123-4567';
+            document.getElementById('email').value = 'contact@bahamaconstruction.bs';
+            document.getElementById('address').value = 'Paradise Island, Nassau, Bahamas';
+            document.getElementById('projectNotes').value = 'Complete residential building renovation';
+            document.getElementById('taxRate').value = '7.5';
+            document.getElementById('adminFee').value = '150';
+            document.getElementById('transportFee').value = '200';
+            document.getElementById('terms').value = '30% deposit required. 70% on completion.';
+
+            items = [
+                { id: 1, description: 'Carpentry Work', quantity: 40, unit: 'h', price: 75 },
+                { id: 2, description: 'Masonry', quantity: 120, unit: 'h', price: 65 },
+                { id: 3, description: 'Painting', quantity: 85, unit: 'h', price: 45 },
+                { id: 4, description: 'Electrical Installation', quantity: 60, unit: 'h', price: 85 },
+                { id: 5, description: 'Plumbing', quantity: 50, unit: 'h', price: 80 }
+            ];
+
             renderItems();
-            document.getElementById('quoteNumber').value = 'QUOTE-2024-';
-            document.getElementById('quoteDate').valueAsDate = new Date();
-            const expiryDate = new Date();
-            expiryDate.setDate(expiryDate.getDate() + 30);
-            document.getElementById('expiryDate').valueAsDate = expiryDate;
+            showAlert(currentLanguage === 'en' ? 'Sample data loaded!' : 'Données d\'exemple chargées!', 'success');
         }
-    }
 
-    // Load sample data
-    function loadSampleData() {
-        document.getElementById('clientName').value = 'BAHAMA CONSTRUCTION LTD';
-        document.getElementById('contactName').value = 'Mr. Johnson Smith';
-        document.getElementById('phone').value = '+242-123-4567';
-        document.getElementById('email').value = 'contact@bahamaconstruction.bs';
-        document.getElementById('address').value = 'Paradise Island, Nassau, Bahamas';
-        document.getElementById('projectNotes').value = 'Complete residential building renovation / Rénovation complète du bâtiment résidentiel';
-        document.getElementById('taxRate').value = '7.5';
-        document.getElementById('adminFee').value = '150';
-        document.getElementById('transportFee').value = '200';
-        document.getElementById('terms').value = '30% deposit required / 70% on completion. Payment terms: Net 14 days / Dépôt 30% à la commande. Paiement 70% à la fin.';
+        function exportToExcel() {
+            if (items.length === 0 || !document.getElementById('clientName').value) {
+                showAlert(currentLanguage === 'en' ? 'Please fill required fields' : 'Veuillez remplir les champs requis', 'error');
+                return;
+            }
 
-        items = [
-            { id: 1, description: 'Carpentry Work / Travaux de charpente', quantity: 40, unit: 'h', price: 75 },
-            { id: 2, description: 'Masonry / Maçonnerie', quantity: 120, unit: 'h', price: 65 },
-            { id: 3, description: 'Interior & Exterior Painting / Peinture intérieure et extérieure', quantity: 85, unit: 'h', price: 45 },
-            { id: 4, description: 'Electrical Installation / Installations électriques', quantity: 60, unit: 'h', price: 85 },
-            { id: 5, description: 'Plumbing & Piping / Tuyauterie et plomberie', quantity: 50, unit: 'h', price: 80 },
-            { id: 6, description: 'Cement 50kg bags / Sacs de ciment 50kg', quantity: 40, unit: 'pcs', price: 12 },
-            { id: 7, description: 'Steel Materials / Matériaux acier', quantity: 2.5, unit: 'kg', price: 8 }
-        ];
+            const wb = XLSX.utils.book_new();
+            const summaryData = [
+                ['BUILDQUOTE PRO - PROFESSIONAL QUOTE'],
+                [],
+                ['CLIENT INFORMATION'],
+                ['Company Name', document.getElementById('clientName').value],
+                ['Contact', document.getElementById('contactName').value],
+                ['Phone', document.getElementById('phone').value],
+                ['Email', document.getElementById('email').value],
+                [],
+                ['ITEMS'],
+                ['Description', 'Quantity', 'Unit', 'Unit Price', 'Total']
+            ];
+
+            items.forEach(item => {
+                summaryData.push([
+                    item.description,
+                    item.quantity,
+                    item.unit,
+                    item.price.toFixed(2),
+                    (item.quantity * item.price).toFixed(2)
+                ]);
+            });
+
+            const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+            const discountRate = parseFloat(document.getElementById('discountRate').value) || 0;
+            const adminFee = parseFloat(document.getElementById('adminFee').value) || 0;
+            const transportFee = parseFloat(document.getElementById('transportFee').value) || 0;
+
+            const discountAmount = subtotal * (discountRate / 100);
+            const afterDiscount = subtotal - discountAmount;
+            const withFees = afterDiscount + adminFee + transportFee;
+            const taxAmount = withFees * (taxRate / 100);
+            const total = withFees + taxAmount;
+
+            summaryData.push([]);
+            summaryData.push(['Subtotal', '', '', '', subtotal.toFixed(2)]);
+            if (discountAmount > 0) summaryData.push(['Discount', '', '', '', discountAmount.toFixed(2)]);
+            if (adminFee > 0) summaryData.push(['Admin Fees', '', '', '', adminFee.toFixed(2)]);
+            if (transportFee > 0) summaryData.push(['Transport Fees', '', '', '', transportFee.toFixed(2)]);
+            if (taxAmount > 0) summaryData.push(['Tax/VAT', '', '', '', taxAmount.toFixed(2)]);
+            summaryData.push(['TOTAL', '', '', '', total.toFixed(2)]);
+
+            const ws = XLSX.utils.aoa_to_sheet(summaryData);
+            XLSX.utils.book_append_sheet(wb, ws, 'Quote');
+
+            XLSX.writeFile(wb, `Quote_${document.getElementById('quoteNumber').value}.xlsx`);
+            showAlert(currentLanguage === 'en' ? 'Excel file exported successfully!' : 'Fichier Excel exporté avec succès!', 'success');
+        }
+
+        function exportToCSV() {
+            if (items.length === 0 || !document.getElementById('clientName').value) {
+                showAlert(currentLanguage === 'en' ? 'Please fill required fields' : 'Veuillez remplir les champs requis', 'error');
+                return;
+            }
+
+            let csv = 'BUILDQUOTE PRO - PROFESSIONAL QUOTE\n\n';
+            csv += 'CLIENT INFORMATION\n';
+            csv += `Company Name,${document.getElementById('clientName').value}\n`;
+            csv += `Contact,${document.getElementById('contactName').value}\n`;
+            csv += `Phone,${document.getElementById('phone').value}\n`;
+            csv += `Email,${document.getElementById('email').value}\n\n`;
+
+            csv += 'ITEMS\n';
+            csv += 'Description,Quantity,Unit,Unit Price,Total\n';
+            items.forEach(item => {
+                csv += `"${item.description}",${item.quantity},${item.unit},${item.price.toFixed(2)},${(item.quantity * item.price).toFixed(2)}\n`;
+            });
+
+            const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+            const discountRate = parseFloat(document.getElementById('discountRate').value) || 0;
+            const adminFee = parseFloat(document.getElementById('adminFee').value) || 0;
+            const transportFee = parseFloat(document.getElementById('transportFee').value) || 0;
+
+            const discountAmount = subtotal * (discountRate / 100);
+            const afterDiscount = subtotal - discountAmount;
+            const withFees = afterDiscount + adminFee + transportFee;
+            const taxAmount = withFees * (taxRate / 100);
+            const total = withFees + taxAmount;
+
+            csv += '\nSUMMARY\n';
+            csv += `Subtotal,,,,${subtotal.toFixed(2)}\n`;
+            if (discountAmount > 0) csv += `Discount,,,,${discountAmount.toFixed(2)}\n`;
+            if (adminFee > 0) csv += `Admin Fees,,,,${adminFee.toFixed(2)}\n`;
+            if (transportFee > 0) csv += `Transport Fees,,,,${transportFee.toFixed(2)}\n`;
+            if (taxAmount > 0) csv += `Tax/VAT,,,,${taxAmount.toFixed(2)}\n`;
+            csv += `TOTAL,,,,${total.toFixed(2)}\n`;
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = `Quote_${document.getElementById('quoteNumber').value}.csv`;
+            link.click();
+
+            showAlert(currentLanguage === 'en' ? 'CSV file exported successfully!' : 'Fichier CSV exporté avec succès!', 'success');
+        }
+
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = 'alert show alert-' + type;
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 4000);
+        }
 
         renderItems();
-        showAlert(currentLanguage === 'en' ? 'Sample data loaded!' : 'Données d\'exemple chargées!', 'success');
-    }
-
-    // Show alert
-    function showAlert(message, type) {
-        const alert = document.getElementById('alert');
-        alert.textContent = message;
-        alert.className = 'alert show alert-' + type;
-        setTimeout(() => {
-            alert.classList.remove('show');
-        }, 4000);
-    }
-
-    // Initialize
-    renderItems();
-</script>
-```
-
+    </script>
 </body>
 </html>
+EOF
+wc -l /mnt/user-data/outputs/index.html
